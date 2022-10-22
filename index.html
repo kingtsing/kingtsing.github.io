@@ -78,6 +78,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2017-02-16-Git-代码回滚" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/02/16/2017-02-16-Git-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/" class="article-date">
+  <time class="dt-published" datetime="2017-02-15T16:00:00.000Z" itemprop="datePublished">2017-02-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2017/02/16/2017-02-16-Git-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/">Git 代码回滚</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>并不适合阅读的个人文档。</p>
+</blockquote>
+<h1 id="git-revert-和-git-reset-的区别"><a href="#git-revert-和-git-reset-的区别" class="headerlink" title="git revert 和 git reset 的区别"></a><strong>git revert</strong> 和 <strong>git reset</strong> 的区别</h1><p> 先看图：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tNbRwgy1fcr9tu6vdjj30t30ez0y8.jpg"></p>
+<p><strong>sourceTree</strong> 中 <strong>revert</strong> 译为**<code>提交回滚</code>**，作用为忽略你指定的版本，然后提交一个新的版本。新的版本中已近删除了你所指定的版本。</p>
+<p><strong>reset</strong> 为 <strong>重置到这次提交</strong>，将内容重置到指定的版本。<code>git reset</code> 命令后面是需要加2种参数的：<code>–-hard</code> 和 <code>–-soft</code>。这条命令默认情况下是 <code>-–soft</code>。</p>
+<p>执行上述命令时，这该条commit号之 后（时间作为参考点）的所有commit的修改都会退回到git缓冲区中。使用<code>git status</code> 命令可以在缓冲区中看到这些修改。而如果加上<code>-–hard</code>参数，则缓冲区中不会存储这些修改，git会直接丢弃这部分内容。可以使用 <code>git push origin HEAD --force</code> 强制将分区内容推送到远程服务器。</p>
+<h4 id="代码回退"><a href="#代码回退" class="headerlink" title="代码回退"></a>代码回退</h4><p>默认参数 <code>-soft</code>,所有commit的修改都会退回到git缓冲区<br>参数<code>--hard</code>，所有commit的修改直接丢弃</p>
+<pre><code>$ git reset --hard HEAD^ 		回退到上个版本
+$ git reset --hard commit_id	退到/进到 指定commit_id
+</code></pre>
+<p>推送到远程	</p>
+<pre><code>$ git push origin HEAD --force
+</code></pre>
+<h4 id="可以吃的后悔药-gt-版本穿梭"><a href="#可以吃的后悔药-gt-版本穿梭" class="headerlink" title="可以吃的后悔药-&gt;版本穿梭"></a>可以吃的后悔药-&gt;版本穿梭</h4><p>当你回滚之后，又后悔了，想恢复到新的版本怎么办？</p>
+<p>用<code>git reflog</code>打印你记录你的每一次操作记录</p>
+<pre><code>$ git reflog
+
+输出：
+c7edbfe HEAD@&#123;0&#125;: reset: moving to c7edbfefab1bdbef6cb60d2a7bb97aa80f022687
+470e9c2 HEAD@&#123;1&#125;: reset: moving to 470e9c2
+b45959e HEAD@&#123;2&#125;: revert: Revert &quot;add img&quot;
+470e9c2 HEAD@&#123;3&#125;: reset: moving to 470e9c2
+2c26183 HEAD@&#123;4&#125;: reset: moving to 2c26183
+0f67bb7 HEAD@&#123;5&#125;: revert: Revert &quot;add img&quot;
+</code></pre>
+<p>找到你操作的id如：<code>b45959e</code>，就可以回退到这个版本</p>
+<pre><code>$ git reset --hard b45959e
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kingtsing.github.io/2017/02/16/2017-02-16-Git-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/" data-id="cl9jkajbb0000q0lv8p4qhpyc" data-title="Git 代码回滚" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF/" rel="tag">终端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2017-02-15-Git指令整理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2017/02/15/2017-02-15-Git%E6%8C%87%E4%BB%A4%E6%95%B4%E7%90%86/" class="article-date">
@@ -400,6 +470,10 @@ $ git archives
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/16/2017-02-16-Git-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/">Git 代码回滚</a>
+          </li>
         
           <li>
             <a href="/2017/02/15/2017-02-15-Git%E6%8C%87%E4%BB%A4%E6%95%B4%E7%90%86/">Git指令整理</a>
