@@ -1,1 +1,282 @@
-aaaa
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naro | 探索程式與人生的邊界</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background: linear-gradient(135deg, #fafafa 0%, #e0f7fa 100%);
+            color: #333;
+            line-height: 1.8;
+            margin: 0;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(76, 161, 175, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(44, 62, 80, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(76, 161, 175, 0.05) 0%, transparent 50%);
+            animation: flow 10s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+        @keyframes flow {
+            0% { transform: translateX(-10px) translateY(-10px); }
+            100% { transform: translateX(10px) translateY(10px); }
+        }
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .container {
+            width: 900px;
+            margin: 10px auto;
+            padding: 10px;
+            display: flex;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .tag {
+            display: inline-block;
+            background: #f0f2f5;
+            color: #555;
+            padding: 4px 15px;
+            border-radius: 20px;
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+        .motto {
+            font-style: italic;
+            color: #7f8c8d;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #bdc3c7;
+            padding: 10px;
+            width: 100%;
+            background: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        .social-links {
+            margin: 15px 0 0 0;
+            display: flex;
+            justify-content: center;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #bdc3c7;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #4ca1af;
+        }
+        /* Tab styles */
+        .tabs {
+            flex: 0 0 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin-right: 10px;
+        }
+        .tab-button {
+            background: #f0f2f5;
+            border: 1px solid #ccc;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+        .tab-button.active {
+            background: #4ca1af;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            max-width: 700px;
+            min-width: 300px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 5px;
+                width: 100%;
+                max-width: none;
+            }
+            .tabs {
+                flex: none;
+                margin-right: 0;
+                margin-bottom: 10px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+            .tab-content {
+                width: auto;
+                max-width: 100%;
+            }
+            .card {
+                padding: 15px;
+                height: auto;
+                overflow-y: auto;
+            }
+            .tab-button {
+                width: 100%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab('about')">關於我</button>
+        <button class="tab-button" onclick="openTab('processor')">人類處理器</button>
+        <button class="tab-button" onclick="openTab('symbiosis')">AI 共生</button>
+        <button class="tab-button" onclick="openTab('creator')">無名創造者</button>
+        <button class="tab-button" onclick="openTab('progress')">思考進度</button>
+        <button class="tab-button" onclick="openTab('trigger')">思辨觸發器</button>
+    </div>
+
+    <div id="about" class="tab-content active card">
+        <h1 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">老馮 Naro</h1>
+        <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">金門大學資工系 | 程式邏輯與哲學思考的實踐者</p>
+        <p>我目前就讀於國立金門大學資工系。對我而言，資工不只是寫程式，更是一種邏輯的修煉。我熱衷於探討<b>哲學與人生議題</b>，喜歡在繁雜的代碼與深奧的思想中尋找平衡點。</p>
+        <p class="motto">「人生就像一段不斷重構的程式碼，目標是寫出最優雅的解法。」</p>
+    </div>
+
+    <div id="processor" class="tab-content card">
+        <h2>人類處理器</h2>
+        <p>我將自己視為一個「純粹思考者」，專注於系統性的建構與跨維度的連結：</p>
+        <div>
+            <span class="tag">🔗 跨域整合</span>
+            <span class="tag">🧠 模式識別</span>
+            <span class="tag">📚 哲學綜合</span>
+            <span class="tag">🤖 AI 共生</span>
+        </div>
+        <p style="margin-top: 15px;">比起寫程式碼，我更迷戀於將 AI 視為實踐創意的義體，探索程式與人生的邊界。</p>
+    </div>
+
+    <div id="symbiosis" class="tab-content card">
+        <h2>AI 共生</h2>
+        <p>我相信人類直覺與 AI 執行的完美協作。原始思想遇上演算法力量，在這裡誕生創新。</p>
+        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(45deg, #4ca1af, #2c3e50); opacity: 0.7; position: relative;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: #fff; position: absolute; top: 20px; left: 20px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🧠</div>
+            </div>
+            <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(45deg, #2c3e50, #4ca1af); opacity: 0.7; position: relative; margin-left: -30px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: #fff; position: absolute; top: 20px; left: 20px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🤖</div>
+            </div>
+        </div>
+        <p>這是「原始思想」與「演算法力量」的交匯點。</p>
+    </div>
+
+    <div id="creator" class="tab-content card" style="text-align: center; background: rgba(255,255,255,0.8);">
+        <blockquote style="font-size: 1.5rem; font-family: serif; color: #2c3e50; margin: 0;">
+            "知識流經我的神經，以演化，而非僅被記住。"
+        </blockquote>
+        <p style="margin-top: 10px; color: #7f8c8d;">— 無名創造者</p>
+    </div>
+
+    <div id="progress" class="tab-content card">
+        <h2>思考進度</h2>
+        <p>持續進行的思考專案：</p>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 10px;"><strong>AI 倫理的未來</strong> <span class="tag">綜合中</span></li>
+            <li style="margin-bottom: 10px;"><strong>能源科技與未來</strong> <span class="tag">發散中</span></li>
+            <li style="margin-bottom: 10px;"><strong>科技中的跨域整合</strong> <span class="tag">探索中</span></li>
+        </ul>
+    </div>
+
+    <div id="trigger" class="tab-content card" style="text-align: center;">
+        <h2>思辨觸發器</h2>
+        <button id="thoughtButton" style="background: #4ca1af; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: background 0.3s ease;" onmouseover="this.style.background='#2c3e50'" onmouseout="this.style.background='#4ca1af'">產生火花</button>
+        <p id="thoughtOutput" style="margin-top: 20px; font-style: italic; color: #7f8c8d;"></p>
+    </div>
+</div>
+
+<div class="footer">
+    <p>© 2026 Naro | 於金門島嶼。用心生活，用腦思考。</p>
+    <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 10px;">24.4321° N, 118.3188° E</p>
+    <div class="social-links">
+        <a href="https://github.com/NaroFeng" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/hoshiny.f" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+</div>
+
+<script>
+    function openTab(tabName) {
+        const tabContents = document.querySelectorAll('.tab-content');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        tabContents.forEach(content => content.classList.remove('active'));
+        tabButtons.forEach(button => button.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    const thoughts = [
+        "如果 AI 能思考，那麼思考的本質是什麼？在這個數位時代，我們常常將智慧與計算能力混為一談，但真正的思考或許超越了演算法的界限。",
+        "科技是否讓我們更孤獨，還是更連結？當我們透過螢幕連接全世界時，是否同時失去了面對面交流的深度與溫暖？",
+        "程式碼是語言，哲學是思想，二者如何交織？在編寫程式的過程中，我們是否也在建構自己的世界觀與價值體系？",
+        "金門的寧靜，如何塑造一個思考者的靈魂？在這個小島上，遠離都市的喧囂，讓我們有機會重新審視內心的聲音。",
+        "創新是破壞，還是演化？每一次科技進步，都在改變我們的生活方式，但我們是否準備好面對這些改變帶來的挑戰與機會？"
+    ];
+
+    document.getElementById('thoughtButton').addEventListener('click', function() {
+        const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+        document.getElementById('thoughtOutput').textContent = randomThought;
+    });
+</script>
+
+</body>
+</html>
